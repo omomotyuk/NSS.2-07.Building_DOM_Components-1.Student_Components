@@ -126,6 +126,20 @@ const createStudentSmallerComponent = ( student, element ) => {
     `
 }
 
+// generic function to create component_type element
+const elementGeneric = ( component_type, component_content, class_attribute ) => {
+return `<${component_type} class="${class_attribute}">${component_content}</${component_type}>`
+}
+
+// function to create 'Student' component with use of generic function
+const createStudentGenericComponent = (student, element) => `
+    <div class="${element.div_class}">
+        ${elementGeneric("h1", student.name, element.h1_class)}
+        ${elementGeneric("section", student.subject, element.section_class)}
+        ${elementGeneric("aside", student.info, element.aside_class)}
+    </div>
+`
+
 // selection of 'container' component of page
 const mainElement = document.querySelector( '#container' );
 
@@ -149,4 +163,6 @@ const createDOMElement = ( functionParam ) => {
 //
 //createDOMElement( createStudentComponent );
 //
-createDOMElement( createStudentSmallerComponent );
+//createDOMElement( createStudentSmallerComponent );
+//
+createDOMElement( createStudentGenericComponent );
