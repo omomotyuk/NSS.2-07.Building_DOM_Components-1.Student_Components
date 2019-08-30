@@ -77,6 +77,7 @@ const students = [
     }
 ]
 
+//
 function element ( div, h1, section, aside ) {
     this.div_class = div;
     this.h1_class = h1;
@@ -84,6 +85,7 @@ function element ( div, h1, section, aside ) {
     this.aside_class = aside;
 }
 
+//
 const createStudentComponent = ( student, element ) => {
     return `
         <div class="${element.div_class}">
