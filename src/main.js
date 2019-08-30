@@ -146,5 +146,7 @@ const createDOMElement = ( functionParam ) => {
     }
 }
 
+//
 //createDOMElement( createStudentComponent );
+//
 createDOMElement( createStudentSmallerComponent );
