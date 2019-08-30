@@ -77,7 +77,7 @@ const students = [
     }
 ]
 
-//
+// function to create '.class' list for created elements
 function element ( div, h1, section, aside ) {
     this.div_class = div;
     this.h1_class = h1;
@@ -85,7 +85,7 @@ function element ( div, h1, section, aside ) {
     this.aside_class = aside;
 }
 
-//
+// function to create 'Student' component
 const createStudentComponent = ( student, element ) => {
     return `
         <div class="${element.div_class}">
@@ -96,16 +96,55 @@ const createStudentComponent = ( student, element ) => {
     `
 }
 
+/*
+Write functions that build the sub-components of the larger student component.
+Invoke those functions inside the createStudentComponent function to build the parent <div>.
+*/
+// small function to generate <h1> element
+const h1 = (student, element) => {
+    return `<h1 class="${element.h1_class}">${student.name}</h1>`
+}
+
+// small function to create <section> element
+const section = (student, element) => {
+    return `<section class="${element.section_class}">${student.subject}</section>`
+}          
+
+// small function to create <aside> element
+const aside = (student, element) => {
+    return `<aside class="${element.aside_class}">${student.info}</aside>`
+}          
+
+// function to create 'Student' component with use of small functions
+const createStudentSmallerComponent = ( student, element ) => {
+    return `
+        <div class="${element.div_class}">
+            ${h1( student, element )}
+            ${section( student, element )}
+            ${aside( student, element )}
+        </div>
+    `
+}
+
+// selection of 'container' component of page
 const mainElement = document.querySelector( '#container' );
 
+// creation of description elements
 const elementPass = new element( "student", "xx-large passing", "bordered dashed section--padded", "pushRight" );
 const elementFail = new element( "student", "", "", "" );
 
 // Iterate the array of students, and apply the correct style to the h1 depending on the score of the student being below 60, or above it.
-for (const student of students) {
-    if (student.score >= 60) {
-        mainElement.innerHTML += createStudentComponent( student, elementPass );
-    } else {
-        mainElement.innerHTML += createStudentComponent( student, elementFail );
+
+// function for creation of required DOM element
+const createDOMElement = ( functionParam ) => {
+    for (const student of students) {
+        if (student.score >= 60) {
+            mainElement.innerHTML += functionParam( student, elementPass );
+        } else {
+            mainElement.innerHTML += functionParam( student, elementFail );
+        }
     }
 }
+
+//createDOMElement( createStudentComponent );
+createDOMElement( createStudentSmallerComponent );
